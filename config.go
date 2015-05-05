@@ -42,11 +42,12 @@ func ReadConfig(namespace string, cfg interface{}) bool {
 
   readConsulKey := func(name string) string {
     pair, _, err := kv.Get(name,nil)
-    if err != nil {
-      log.Println("err",err)
+    if err != nil || pair == nil  {
+      log.Println("err reading ",name,err)
       return ""
     }
     status = true
+
     return string(pair.Value[:])
   }
 

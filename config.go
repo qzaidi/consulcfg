@@ -50,7 +50,7 @@ func ReadConfig(namespace string, cfg interface{}) bool {
     return string(pair.Value[:])
   }
 
-  readStruct(readConsulKey,"wallet",reflect.TypeOf(cfg).Elem(),reflect.ValueOf(cfg).Elem())
+  readStruct(readConsulKey,namespace,reflect.TypeOf(cfg).Elem(),reflect.ValueOf(cfg).Elem())
   return status
 }
 

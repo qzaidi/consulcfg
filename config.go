@@ -18,7 +18,7 @@ func readStruct (getter func(string) string, prefix string, st reflect.Type, v r
     case reflect.Struct:
       readStruct(getter,prefix + "/" + field.Name,field.Type,val)
     case reflect.String:
-      key := fmt.Sprintf("%s.%s",prefix,field.Name)
+      key := fmt.Sprintf("%s/%s",prefix,field.Name)
       if  cval := getter(key); cval != "" {
         val.SetString(cval)
       }
@@ -50,6 +50,11 @@ func ReadConfig(namespace string, cfg interface{}) bool {
     return string(pair.Value[:])
   }
 
-  readStruct(readConsulKey,"wallet",reflect.TypeOf(cfg),reflect.ValueOf(cfg).Elem())
+  readStruct(readConsulKey,"wallet",reflect.TypeOf(cfg).Elem(),reflect.ValueOf(cfg).Elem())
   return status
+}
+
+// marshals struct into consul key value pairs
+func SaveConfig(namespace string, cfg interface{}) bool {
+  return false
 }

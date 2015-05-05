@@ -1,2 +1,7 @@
 # consulcfg
-marshal config from consul
+marshal/unmarshal config from consul
+
+Usage
+-----
+
+See godocs
